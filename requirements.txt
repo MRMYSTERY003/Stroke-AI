@@ -13,4 +13,4 @@ sklearn==0.0
 threadpoolctl==3.1.0
 Werkzeug==2.2.2
 zipp==3.9.0
-https://github.com/google-coral/pycoral/releases/download/v2.0.0/tflite_runtime-2.5.0.post1-cp39-cp39-win_amd64.whl
+tflite-runtime
