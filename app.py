@@ -5,7 +5,7 @@ from model import predict
 app = Flask(__name__)
 
 
-@app.route('/', methods=["POST", "GET"])
+@app.route('/', methods=["POST"])
 def home():
     if request.method == "POST":
         gender = request.form.get("gender")

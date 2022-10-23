@@ -3,6 +3,7 @@ from tflite_runtime.interpreter import Interpreter
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 
+print("loaded the module successfully")
 
 encoder = OneHotEncoder(handle_unknown='ignore')
 oldX = np.load("Models\\train.npy", allow_pickle=True)
@@ -58,4 +59,3 @@ def predict(gender, age, hypertension, heartdisease, ever_married, work_type, Re
         return ["please enter a valied input", 0]
 
 
-predict("Male", 19, 0, 0, "No", "children", "Urban", 139)
