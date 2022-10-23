@@ -13,4 +13,4 @@ sklearn==0.0
 threadpoolctl==3.1.0
 Werkzeug==2.2.2
 zipp==3.9.0
-tflite-runtime==2.4.0
+https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp36-cp36m-linux_aarch64.whl
