@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroke Predictor</title>
+    <link href="../static/styles/result.css" rel='stylesheet' type='text/css' media="all">
+
+</head>
+<body>
+    <div class="but">
+        <button id = 'back' onclick="history.back()">Home</button>
+    </div>
+
+    <h3 id = "res-head">RESULTS</h3>
+
+    <div class="container">
+        
+        <div class="res-content">
+            <div class="accuracy">
+                prediction accuracy : {{value[1]}}%
+            </div>
+            <div class="result">
+                {{value[0]}}
+            </div>
+        </div>
+    </div>
+
+        <div class="prev">
+            <div class="cont-r">
+                <h3>Thinks that you need to do to prevent stroke</h3>
+                <ul>
+                  <li>Lower blood pressure</li>
+                  <li>Lose weight</li>
+                  <li>Exercise more</li>
+                  <li>If you drink — do it in moderation</li>
+                  <li>Treat atrial fibrillation</li>
+                  <li>Treat diabetes</li>
+                  <li>Quit smoking</li>
+                </ul>
+              </div>
+        </div>
+
+    
+</body>
+</html>
