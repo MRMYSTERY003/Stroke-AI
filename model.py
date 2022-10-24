@@ -6,9 +6,12 @@ from sklearn.preprocessing import OneHotEncoder
 
 print("loaded the module successfully")
 
+model = tf.keras.models.load_model("Models/Stroke-model2.h5")
+print("model loaded")
+
 encoder = OneHotEncoder(handle_unknown='ignore')
-oldX = np.load("Models\\train.npy", allow_pickle=True)
-model = tf.keras.models.load_model("Models\\Stroke-model2.h5")
+oldX = np.load("Models/train.npy", allow_pickle=True)
+print("train file is loaded")
 
 
 # encode columns with string data
