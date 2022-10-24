@@ -1,5 +1,5 @@
 import numpy as np
-from tflite_runtime.interpreter import Interpreter
+from tensorflow.lite.interpreter import Interpreter
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 
