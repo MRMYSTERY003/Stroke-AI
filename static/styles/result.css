@@ -12,6 +12,31 @@
     }
 }
 
+.but{
+    display: flex;
+    justify-content: center;
+}
+
+
+.result{
+    margin: 10px;
+    font-size: 1.2rem;
+}
+
+.accuracy{
+    margin: 10px;
+    font-size: 1.2rem;
+}
+
+#back{
+    margin: 0;
+    padding: 10px;
+    color: black;
+    border-width: 1px;
+    border-radius: 5;
+    background-color: rgb(228 228 228 / 15%);
+}
+
 
 body{
     overflow-x: hidden;
