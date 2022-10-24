@@ -14,5 +14,7 @@ sklearn==0.0
 threadpoolctl==3.1.0
 Werkzeug==2.2.2
 zipp==3.9.0
-tensorflow-cpu
 numpy
+tflite
+https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_x86_64.whl ; sys_platform == "linux"
+https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-win_amd64.whl ; sys_platform == "windows"
