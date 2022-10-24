@@ -1,5 +1,6 @@
 import numpy as np
-from tensorflow.lite.interpreter import Interpreter
+import tensorflow as tf
+
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 
@@ -7,13 +8,7 @@ print("loaded the module successfully")
 
 encoder = OneHotEncoder(handle_unknown='ignore')
 oldX = np.load("Models\\train.npy", allow_pickle=True)
-
-interpreter = Interpreter(model_path='Models\\model.tflite')
-interpreter.allocate_tensors()
-
-input_details = interpreter.get_input_details()
-output_details = interpreter.get_output_details()
-
+model = tf.keras.models.load_model("Models\\Stroke-model2.h5")
 
 
 # encode columns with string data
@@ -30,26 +25,18 @@ def predict(gender, age, hypertension, heartdisease, ever_married, work_type, Re
         row = [gender, age, hypertension, heartdisease, ever_married,
                work_type, Resident_type, float(glucose)]
 
-        row = ct.transform([row]).astype("float32")
+        row = ct.transform([row]).astype("float64")
         print(row)
-
-
-        input_data = row
-
-        # Invoke the model on the input data
-        interpreter.set_tensor(input_details[0]['index'], input_data)
-        interpreter.invoke()
-
-        # Get the result 
-        output_data = interpreter.get_tensor(output_details[0]['index'])
-        print(output_data)
-
-
-
-
-        accuracy = str(max(output_data[0])*100)
+        res = model.predict([row])
+        accuracy = str(max(res[0])*100)
         print(accuracy)
-        result = np.argmax(output_data)
+        result = np.argmax(res)
+
+        print(res)
+
+        accuracy = str(max(res[0])*100)
+        print(accuracy)
+        result = np.argmax(res)
         if result == 0:
             return ["According to our prediction your are healthy and will not get attacked by stroke.", accuracy[:accuracy.index(".")+3]]
         elif result == 1:
