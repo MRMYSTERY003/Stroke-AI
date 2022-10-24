@@ -1,17 +1,18 @@
 import numpy as np
-import tensorflow as tf
-
+from tflite_runtime.interpreter import Interpreter
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 
 print("loaded the module successfully")
 
-model = tf.keras.models.load_model("Models/Stroke-model2.h5")
-print("model loaded")
-
 encoder = OneHotEncoder(handle_unknown='ignore')
 oldX = np.load("Models/train.npy", allow_pickle=True)
-print("train file is loaded")
+
+interpreter = Interpreter(model_path='Models/model.tflite')
+interpreter.allocate_tensors()
+
+input_details = interpreter.get_input_details()
+output_details = interpreter.get_output_details()
 
 
 # encode columns with string data
@@ -28,18 +29,22 @@ def predict(gender, age, hypertension, heartdisease, ever_married, work_type, Re
         row = [gender, age, hypertension, heartdisease, ever_married,
                work_type, Resident_type, float(glucose)]
 
-        row = ct.transform([row]).astype("float64")
+        row = ct.transform([row]).astype("float32")
         print(row)
-        res = model.predict([row])
-        accuracy = str(max(res[0])*100)
-        print(accuracy)
-        result = np.argmax(res)
 
-        print(res)
+        input_data = row
 
-        accuracy = str(max(res[0])*100)
+        # Invoke the model on the input data
+        interpreter.set_tensor(input_details[0]['index'], input_data)
+        interpreter.invoke()
+
+        # Get the result
+        output_data = interpreter.get_tensor(output_details[0]['index'])
+        print(output_data)
+
+        accuracy = str(max(output_data[0])*100)
         print(accuracy)
-        result = np.argmax(res)
+        result = np.argmax(output_data)
         if result == 0:
             return ["According to our prediction your are healthy and will not get attacked by stroke.", accuracy[:accuracy.index(".")+3]]
         elif result == 1:
@@ -47,5 +52,3 @@ def predict(gender, age, hypertension, heartdisease, ever_married, work_type, Re
     except Exception as e:
         print(e)
         return ["please enter a valied input", 0]
-
-
